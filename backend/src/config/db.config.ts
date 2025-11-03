@@ -1,8 +1,19 @@
-import mongoose, { Schema } from "mongoose"
+import mongoose, { Document, Schema } from "mongoose"
 import dotenv from "dotenv";
 dotenv.config();
 mongoose.connect(process.env.mongoURL as string);
-const userSchema = new Schema({
+interface IUser extends Document{
+    username:string;
+    password:string;
+    firstName:string;
+    lastName:string;
+}
+interface INote extends Document{
+    userId:mongoose.Types.ObjectId;
+    title:string;
+    description?:string;
+}
+const userSchema = new Schema<IUser>({
         username: {
         type: String,
         required: true,
@@ -28,9 +39,9 @@ const userSchema = new Schema({
             type:String,
             required:true,
             minLength:6
-        }
+        },
 });
-const noteSchema = new Schema({
+const noteSchema = new Schema<INote>({
     userId:{
         type:mongoose.Schema.Types.ObjectId,
         ref:"User",
@@ -49,5 +60,5 @@ const noteSchema = new Schema({
     timestamps:true
 })
 
-export const User = mongoose.model("User" , userSchema);
-export const Note = mongoose.model("Note" , noteSchema);
+export const User = mongoose.model<IUser>("User" , userSchema);
+export const Note = mongoose.model<INote>("Note" , noteSchema);
