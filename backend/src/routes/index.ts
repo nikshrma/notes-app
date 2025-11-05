@@ -1,7 +1,8 @@
 import express, { Router } from "express"
-import { userRouter } from "./notes.js";
-import { notesRouter } from "./users.js";
+import { usersRouter } from "./users.js";
+import { notesRouter } from "./notes.js";
+
 export const rootRouter = Router();
 
-rootRouter.use("/users" ,userRouter );
-rootRouter.use("/notes" ,notesRouter );
+rootRouter.use("/users" ,usersRouter );
+rootRouter.use("/notes" ,notesRouter);
