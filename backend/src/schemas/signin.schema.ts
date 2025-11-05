@@ -1,5 +1,6 @@
 import zod from "zod"
-const signinSchema = zod.object({
+export const signinSchema = zod.object({
     username: zod.email(),
     password: zod.string(),
 })
+export type UserInputOnSignIn = zod.infer<typeof signinSchema>
