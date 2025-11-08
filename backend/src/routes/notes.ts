@@ -7,13 +7,14 @@ export const notesRouter = Router();
 
 notesRouter.post("/" , authCheck ,async (req,res)=>{
     const notePayload = req.body;
-    const {success} = noteSchema.safeParse(notePayload);
+    const noteToAdd = {...notePayload , userId:(req as any).userId};
+    const {success} = noteSchema.safeParse(noteToAdd);
     if(!success){
         return res.status(statusCodes.bad_request).json({
             message:"Failed to add note."
         })
     }
-    const note = await addNewNote({...notePayload , userId:(req as any).userId});
+    const note = await addNewNote(noteToAdd);
     return res.status(statusCodes.successful_request).json({
         message:"Note created successfully",
         noteId: note._id
