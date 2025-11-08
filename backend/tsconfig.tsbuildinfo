@@ -1,1 +1,1 @@
-{"root":["./src/index.ts","./src/middlewares.ts","./src/config/db.ts","./src/routes/index.ts","./src/routes/notes.ts","./src/routes/users.ts"],"version":"5.9.3"}
+{"root":["./src/index.ts","./src/config/db.config.ts","./src/config/statuscodes.enum.ts","./src/middlewares/auth.middleware.ts","./src/routes/index.ts","./src/routes/notes.ts","./src/routes/users.ts","./src/schemas/note.schema.ts","./src/schemas/signin.schema.ts","./src/schemas/signup.schema.ts","./src/services/note.services.ts","./src/services/user.services.ts"],"version":"5.9.3"}
