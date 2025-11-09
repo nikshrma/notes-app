@@ -24,7 +24,7 @@ export function SignUp() {
   }
 
   const handleSignUp = async () => {
-    // TODO: Add API call to your backend
+    // gotta call backend here
     console.log("Sign up data:", formData)
     // navigate("/dashboard") // Uncomment after backend integration
   }
