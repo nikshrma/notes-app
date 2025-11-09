@@ -1,21 +1,25 @@
-import { User } from "../config/db.config.js";
+import { PrismaClient } from "../generated/prisma/client.js";
+const prisma = new PrismaClient();
 import bcrypt from "bcrypt";
 const saltRounds = 8;
 import type { UserInputOnSignUp } from "../schemas/signup.schema.js";
 import type { UserInputOnSignIn } from "../schemas/signin.schema.js";
 
-export async function checkUserExistance(userName : string){
-    return await User.findOne({username:userName});
+export async function checkUserExistance(username : string){
+    return await prisma.user.findUnique({
+        where:{username}
+    });
 }
 
 export async function createUser(userPayload: UserInputOnSignUp){
     const userHash = await bcrypt.hash(userPayload.password , saltRounds)
-    const user = await User.create({
+    const user = await prisma.user.create({
+        data:{
         username:userPayload.username,
         password:userHash,
         firstName:userPayload.firstName,
         lastName:userPayload.lastName
-    })
+    }})
     return user;
 };
 

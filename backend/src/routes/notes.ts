@@ -33,7 +33,7 @@ notesRouter.get("/:id" , authCheck , async(req: Request , res: Response)=>{
     const noteId = Number(req.params.id);
     const userId = Number((req as any).userId);
     const note = await fetchNote(noteId);
-    if(!note || note.userId!=userId){
+    if(!note || note.userId!==userId){
         return res.status(statusCodes.forbidden).json({
             message:"Invalid note ID"
         })
@@ -52,6 +52,6 @@ notesRouter.delete("/:id" , authCheck , async(req: Request , res: Response)=>{
         })
     }
     return res.status(statusCodes.successful_request).json({
-       message:"note deleted"
+       message:"Note deleted successfully"
     })
 })
